@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class RequestOtpResponseDto {
-    private String mdOrder;
+    private String mdorder;
     private String requestId;
     private String javax;
     private String errorCode;

@@ -23,13 +23,15 @@ public interface SatimPaymentApi {
         @FormUrlEncoded
         @POST("/payment/rest/processform.do")
         Call<FillFormResponseDto> fillForm(
-                @Field("MDORDER") String mdOrder,
-                @Field("$PAN") String pan,
-                @Field("MM") String expiryMonth,
-                @Field("YYYY") String expiryYear,
-                @Field("$CVC") String cvc,
-                @Field("TEXT") String text,
-                @Field("language") String language);
+                @Query("MDORDER") String mdorder,
+                @Query("$EXPIRY") String expiry,
+                @Query("$PAN") String pan,
+                @Query("MM") String expiryMonth,
+                @Query("YYYY") String expiryYear,
+                @Query("TEXT") String text,
+                @Query("$CVC") String cvv,
+                @Query("language") String language
+        );
 
 
 }

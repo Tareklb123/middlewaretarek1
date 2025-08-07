@@ -55,35 +55,32 @@ public class SatimPaymentService {
                     "{\"orderNumber\":\"" + requestDto.getOrderNumber() + "\",\"force_terminal_id\":\"E006000001\"}"
             ).execute();
             if (response.isSuccessful() && response.body() != null) {
-                 ResponseInitDto ResponseInitDto = response.body();
                   return response.body();
                 } else {
                 throw new RuntimeException(response.errorBody().string());
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-
-        return null;
     }
 
     public FillFormResponseDto fillForm(FillFormRequestDto requestDto) {
         try {
             Response<FillFormResponseDto> response = satimPaymentApi.fillForm(
-                    requestDto.getMDORDER(),
-                    requestDto.getEXPIRY(),
-                    requestDto.getPAN(),
-                    requestDto.getMM(),
-                    requestDto.getYYYY(),
-                    requestDto.getTEXT(),
-                    requestDto.getCVV()
+                    requestDto.getMdorder(),
+                    requestDto.getExpiry(),
+                    requestDto.getPan(),
+                    requestDto.getMm(),
+                    requestDto.getYyyy(),
+                    requestDto.getText(),
+                    requestDto.getCvv(),
+                    "fr"
             ).execute();
 
               if (response.isSuccessful() && response.body() != null) {
-                FillFormResponseDto fillFormResponse = response.body();
-                return response.body();
-
+                  FillFormResponseDto fillFormResponseDto = response.body();
+                return fillFormResponseDto;
                 } else {
                     throw new RuntimeException(response.errorBody().string());
                 }

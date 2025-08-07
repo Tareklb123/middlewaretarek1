@@ -9,5 +9,8 @@ public class ResponseInitDto {
 
         private String orderId;
         private String message;
-    }
+        private String formUrl;
+        private String errorMessage;
+
+}
 

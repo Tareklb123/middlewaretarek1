@@ -8,12 +8,12 @@ import lombok.Setter;
 @Setter
 
 public class FillFormRequestDto {
-    private String MDORDER;
-    private String EXPIRY;
-    private String PAN;
-    private String MM;
-    private String YYYY;
-    private String TEXT;
-    private String CVV;
+    private String mdorder;
+    private String expiry;
+    private String pan;
+    private String mm;
+    private String yyyy;
+    private String text;
+    private String cvv;
 
 }
