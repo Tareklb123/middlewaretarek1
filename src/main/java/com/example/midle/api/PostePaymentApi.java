@@ -24,14 +24,6 @@ public interface PostePaymentApi {
     @GET
     Call<ResponseBody> getHtmlContent(@Url String url);
 
-    @POST("acs/pages/enrollment/authentication.jsf")
-    Call<ResponseBody> authenticateOtpPoste(
-            @Query("authForm") String authForm,
-            @Query("request_id") String requestId,
-            @Query("pwdInputVisible") String otp,
-            @Query("submitPasswordButton") String Submit,
-            @Query("j_id_id58") String jIdId58,
-            @Query("javax.faces.ViewState") String javax);
 
 
 }

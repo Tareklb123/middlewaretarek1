@@ -12,5 +12,10 @@ public class FillFormResponseDto {
     private String termUrl;
     private String errorCode;
     private String error;
+
+    public boolean isPoste() {
+        return acsUrl != null && acsUrl.contains("poste.dz");
     }
+
+}
 

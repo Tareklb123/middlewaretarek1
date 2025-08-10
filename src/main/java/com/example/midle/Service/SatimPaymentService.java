@@ -79,13 +79,17 @@ public class SatimPaymentService {
             ).execute();
 
               if (response.isSuccessful() && response.body() != null) {
-                  FillFormResponseDto fillFormResponseDto = response.body();
-                return fillFormResponseDto;
-                } else {
+                  FillFormResponseDto fillFormResponse = response.body();
+                  if (fillFormResponse.isPoste()) {
+                      RequestOtpResponseDto otpResponse = PostePaymentService.getPosteRequestId(requestDto.getMdOrder(), fillFormResponse);
+                      otpResponse.setBankType("Poste");
+                      return otpResponse;
+
+                  } else {
                     throw new RuntimeException(response.errorBody().string());
                 }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-    }}
+    }}}

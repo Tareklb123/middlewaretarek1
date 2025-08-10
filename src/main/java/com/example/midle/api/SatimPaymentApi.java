@@ -20,7 +20,6 @@ public interface SatimPaymentApi {
                 @Query("jsonParams") String jsonParams
         );
 
-        @FormUrlEncoded
         @POST("/payment/rest/processform.do")
         Call<FillFormResponseDto> fillForm(
                 @Query("MDORDER") String mdorder,
