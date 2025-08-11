@@ -22,6 +22,7 @@ import static org.apache.logging.log4j.message.MapMessage.MapFormat.JSON;
 @Component
 public class SatimPaymentService {
     private final SatimPaymentApi satimPaymentApi;
+    private String url;
 
 
     public SatimPaymentService() {
@@ -78,18 +79,26 @@ public class SatimPaymentService {
                     "fr"
             ).execute();
 
-              if (response.isSuccessful() && response.body() != null) {
-                  FillFormResponseDto fillFormResponse = response.body();
-                  if (fillFormResponse.isPoste()) {
-                      RequestOtpResponseDto otpResponse = PostePaymentService.getPosteRequestId(requestDto.getMdOrder(), fillFormResponse);
-                      otpResponse.setBankType("Poste");
-                      return otpResponse;
+            if (response.isSuccessful() && response.body() != null) {
+                FillFormResponseDto fillFormResponse = response.body();
 
-                  } else {
-                    throw new RuntimeException(response.errorBody().string());
+                if (fillFormResponse.isPoste()) {
+                    return PostePaymentService.getposteRequestId(requestDto.getMdorder(), response.body()).body();
+                } else {
+                    return fillFormResponse;
                 }
+            } else {
+                String errorMessage = "API call failed";
+                if (response.errorBody() != null) {
+                    try {
+                        errorMessage = response.errorBody().string();
+                    } catch (IOException e) {
+                        errorMessage = "Failed to read error response";
+                    }
+                }
+                throw new RuntimeException(errorMessage);
+            }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Network error occurred", e);
         }
-
-    }}}
+    }}
